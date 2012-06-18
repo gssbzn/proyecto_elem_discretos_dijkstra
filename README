@@ -1,0 +1,157 @@
+Calculo de rutas optimas
+
+Observaciones:
+(1) En el plano de la ciudad, pueden existir calles que sólo se recorren en un solo sentido.
+(2) Los intervalos de tiempo para horas pico, horas normales y horas de bajo flujo corresponden a:
+	Horas pico	Horario: 	7:00 am – 9:00 am,	11:30 am – 2:30 pm,	5:30 pm – 7:30 pm 
+	Horas normales	Horario:	9:01 am – 11:29 am,	2:31 pm – 5:29 pm, 	7:31 pm – 9:59 pm 
+	Horas bajo flujo	Horario:	10:00 pm – 6:59 am 
+Nombres de los archivos:
+
+•	Archivo de entrada: plano.in 
+
+•	Archivo de salida: plano.out
+
+Formato de entrada:
+El archivo de entrada contendrá registros de datos de planos de diferentes sectores de la ciudad de Valencia, o incluso un registro de toda la ciudad.  La primera línea de cada registro contendrá el número (entero) de intersecciones (esquinas) existentes en el sector.  Las líneas siguientes del registro, corresponden cada una, a una calle con sus 3 niveles de tráfico (horas pico, horas normales y horas de bajo flujo); la calle está representada por 2 números enteros: Ii e Ij, separados por un espacio en blanco, donde ambos enteros identifican respectivamente las dos intersecciones por las que se extiende la calle (en el sentido Ii hacia Ij), luego aparecen dos espacios en blanco (para separar los datos de las intersecciones de la calle con los datos del tráfico), seguido por los 3 niveles de tráfico de esa calle, representados por 3 números enteros, separados por un espacio en blanco; cabe destacar que el nivel de tráfico mide el tiempo (en minutos) que requiere un vehículo para trasladarse en la calle, desde la intersección inicial Ii hasta la intersección final Ij; la secuencia termina en la siguiente línea con el número 0.  Las líneas que continúan, en el registro, constituyen la secuencia de origen, hora y destinos del (o los) taxi(s), y están agrupadas en secuencias de 3 líneas, donde la primera línea contiene un número entero que representa la intersección cercana al origen o punto de partida del(los) taxi(s), la segunda línea almacena la hora (formato hh:mm am/pm) en que un (o varios) pasajero(s) toma(n) el (o los distintos) taxi(s) en ese origen, y en la tercera línea aparece una serie de números enteros, separados por un espacio en blanco, y que termina con el número 0, para representar la(s) intersección(es) del (de los respectivos) destino(s) del (de los diferentes) pasajero(s) (en el caso de que exista un solo pasajero, esta serie sólo contiene la intersección de su destino, un espacio en blanco y luego el número 0).  La secuencia de origen, hora y destinos termina, cuando en la línea siguiente aparece el número 0.  Entre el registro de un plano y el siguiente debe haber una línea en blanco y la finalización de la entrada de datos es indicada por un plano que tiene 0 intersecciones.
+
+ 
+Formato de salida:
+La salida, para el plano del sector k, se debe mostrar en al menos 4 líneas: 
+
+•	Primera línea: La identificación del plano, es decir, debe aparecer “Plano del Sector k:”.
+
+•	Próximas líneas: La(s) respuesta(s) a la(s) consulta(s) hecha(s) en el plano del sector tratado. Colocando en la próxima línea Ci: j1 - j2 - hora (consulta i-ésima, para un taxi que parte desde un lugar cercano a la intersección j1 en el momento hora y debe dejar al pasajero en un sitio cercano a la intersección j2) y en la(s) siguiente(s) línea(s) una secuencia de números enteros, separados por espacio en blanco, guión y espacio en blanco, que llega hasta máximo 10 números enteros por línea, y representa el recorrido del taxi, de manera que el primer número de la secuencia, es la intersección j1 (la partida) y el último número de la secuencia, es la intersección j2 (el destino), según la secuencia de los datos de entrada.  Después de las líneas que señalan la ruta óptima, en la siguiente línea debe aparecer un número entero seguido de espacio en blanco y luego la palabra “min”, para indicar el tiempo (en minutos) del recorrido de la ruta señalada. Entre una consulta y la siguiente debe haber una línea en blanco.  En caso de que no se pueda hallar el recorrido en el plano (porque, por ejemplo hay reparaciones o se presentó un derrumbe y existen calles o intersecciones inaccesibles), deberá aparecer, en la línea que corresponde a la ruta, el siguiente mensaje: “El taxi no puede prestar el servicio.”.  Para separar la salida de un plano, de la salida del siguiente plano, se debe colocar una línea en blanco.
+
+Ejemplo del archivo de entrada:
+plano.in
+14
+1 2  10 3 1
+2 1  10 3 1
+1 6  9 4 2
+2 3  16 6 3
+3 2  13 4 2
+3 4  37 26 14
+4 3  37 26 14
+4 5  45 22 8
+5 4  45 22 8
+5 6  50 25 10
+6 5  50 25 10
+6 7  40 19 9
+7 6  40 19 9
+6 9  53 37 10
+7 8  7 3 2
+8 7  10 5 3
+8 9  20 12 7
+9 8  20 12 7
+9 10  25 18 7
+10 9  20 15 7
+9 14  30 18 9
+10 11  52 41 30
+11 10  48 38 29
+11 12  12 7 5
+12 11  12 7 5
+12 13  9 3 1
+13 12  9 3 1
+13 14  11 5 2
+14 13  11 5 2
+0
+4 
+8:47 am
+14 0
+3
+4:26 pm
+11 9 0
+5
+3:12 am
+10 0
+10
+3:12 am
+5 0
+9
+8:00 pm
+5 8 3 1 14 2 0
+0
+
+7
+1 2  19 9 3
+2 1  19 9 3
+2 4  23 14 8
+4 2  23 14 8
+2 5  8 4 2
+5 2  8 4 2
+3 6  13 7 4
+6 3  13 7 4
+3 7  16 8 5
+7 3  16 8 5
+4 5  12 6 3
+5 4  12 6 3
+6 7  57 36 13
+7 6  57 36 13
+0
+1 
+10:05 am
+7 0 
+1
+6:38 pm
+4 0
+0
+
+0
+ 
+Ejemplo del archivo de salida correspondiente al ejemplo de entrada:
+plano.out
+
+Plano del Sector 1:
+C1: 4 - 14 - 8:47 am
+4 - 3 - 2 - 1 - 6 - 9 - 14
+152 min 
+
+C2: 3 - 11 - 4:26 pm 
+3 - 2 - 1 - 6 - 7 - 8 - 9 - 14 - 13 - 12 - 
+11
+78 min 
+
+C3: 3 - 9 - 4:26 pm 
+3 - 2 - 1 - 6 - 7 - 8 - 9
+45 min 
+
+C4: 5 - 10 - 3:12 am 
+5 - 6 - 9 - 10
+27 min 
+
+C5: 10 - 5 - 3:12 am 
+10 - 9 - 8 - 7 - 6 - 5
+36 min 
+
+C6: 9 - 5 - 8:00 am 
+9 - 8 - 7 - 6 - 5
+120 min 
+
+C7: 9 - 8 - 8:00 am 
+9 - 8
+20 min 
+
+C8: 9 - 3 - 8:00 am 
+9 - 8 - 7 - 6 - 5 - 4 - 3
+202 min 
+
+C9: 9 - 1 - 8:00 am 
+9 - 8 - 7 - 6 - 5 - 4 - 3 - 2 - 1
+225 min 
+
+C10: 9 - 14 - 8:00 am 
+9 - 14
+30 min 
+
+C11: 9 - 2 - 8:00 am 
+9 - 8 - 7 - 6 - 5 - 4 - 3 - 2
+215 min 
+
+Plano del Sector 2:
+C1: 1 - 7 - 10:05 am
+“El taxi no puede prestar el servicio.”
+
+C2: 1 - 4 - 6:38 pm 
+1 - 2 - 5 - 4
+39 min 
